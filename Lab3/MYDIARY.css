@@ -1,0 +1,56 @@
+body{
+    background-color: #ffe6eb; /* soft pink */
+    font-family: Georgia, serif;
+}
+
+/* Center the form */
+.container{
+    width: 350px;
+    margin: 60px auto;
+    background-color: #fff0f5;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Title */
+h1{
+    color: #d6336c;
+    text-align: center;
+}
+
+/* Labels */
+h3{
+    color: #b03060;
+    margin-bottom: 5px;
+}
+
+/* Input boxes */
+input, textarea{
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ffb6c1;
+    border-radius: 8px;
+}
+
+/* Bigger diary box */
+textarea{
+    height: 100px;
+}
+
+/* Valentine button */
+button{
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* Button hover effect */
+button:hover{
+    background-color: #e63956;
+}
