@@ -1,0 +1,143 @@
+"use client";
+
+import { useState } from "react";
+import "./pokedex.css";
+
+export default function Home() {
+  const [pokemon, setPokemon] = useState("");
+  const [data, setData] = useState<any>(null);
+
+  const searchPokemon = async () => {
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`
+      );
+
+      if (!response.ok) {
+        alert("Pokemon not found!");
+        return;
+      }
+
+      const result = await response.json();
+      setData(result);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <main className="background">
+
+      <div className="pokedex">
+
+        <div className="leftSide">
+
+          
+          <div>
+
+            <div className="topLight"></div>
+
+            <input
+              type="text"
+              placeholder="Search..."
+              value={pokemon}
+              onChange={(e) => setPokemon(e.target.value)}
+              className="input"
+            />
+
+            <button
+              onClick={searchPokemon}
+              className="searchButton"
+            >
+              Search
+            </button>
+
+          </div>
+
+          <div className="screen">
+
+            {data?.sprites?.front_default ? (
+              <img
+                src={data.sprites.front_default}
+                alt={data.name}
+                className="pokemonImage"
+              />
+            ) : (
+              <p>READY</p>
+            )}
+
+          </div>
+
+          <div className="bottomButtons">
+
+            <div className="blueButton"></div>
+
+            <div className="greenButton"></div>
+
+            <div className="orangeButton"></div>
+             <div className="dpad"></div>
+
+          </div>
+
+        </div>
+
+        <div className="rightSide">
+
+          <div className="infoScreen">
+
+            {data ? (
+              <div>
+
+                <h2 className="capitalize">
+                  {data.name}
+                </h2>
+
+                <p>
+                  <strong>Height:</strong> {data.height}
+                </p>
+
+                <p>
+                  <strong>Weight:</strong> {data.weight}
+                </p>
+
+                <p>
+                  <strong>Type:</strong>{" "}
+                  {data.types
+                    .map((t: any) => t.type.name)
+                    .join(", ")}
+                </p>
+
+                <h3>Stats</h3>
+
+                {data.stats.map((s: any) => (
+                  <p key={s.stat.name}>
+                    {s.stat.name}: {s.base_stat}
+                  </p>
+                ))}
+
+              </div>
+            ) : (
+              <p>WAITING FOR INPUT...</p>
+            )}
+
+          </div>
+
+          <div className="gridButtons">
+
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className="smallButton"
+              ></div>
+            ))}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  );
+}
